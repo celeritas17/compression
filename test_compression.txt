@@ -1,0 +1,130 @@
+>>> from compression import compress, decompress
+
+Tests For Compress:
++++++++++++++++++++++++++
+
+>>> compress('A')
+'A'
+
+>>> compress('AAA')
+'AA1'
+
+>>> compress('AAAA')
+'AA2'
+
+>> compress('AAAAAAAAAA')
+'AA8'
+
+>> compress('AAAAAAAAAAA')
+'AA9'
+
+>> compress('AAAAAAAAAAAA')
+'AA9A'
+
+>> compress('AAAAAAAAAAAAA')
+'AA9AA0'
+
+>> compress('AAAAAAAAAAAAAA')
+'AA9AA1'
+
+>>> compress('ABAC')
+'ABAC'
+
+>>> compress('AAB')
+'AA0B'
+
+>>> compress('AABB')
+'AA0BB0'
+
+>>> compress('AAACBBC')
+'AA1CBB0C'
+
+>>> compress('AABBCCDD')
+'AA0BB0CC0DD0'
+
+>>> compress('')
+''
+>>> compress('aaa')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 17, in compress
+    raise ValueError("Input string must be all upper case letters")
+ValueError: Input string must be all upper case letters
+
+>> compress('AAAa')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 17, in compress
+    raise ValueError("Input string must be all upper case letters")
+ValueError: Input string must be all upper case letters
+
+>> compress('A9A')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 17, in compress
+    raise ValueError("Input string must be all upper case letters")
+ValueError: Input string must be all upper case letters
+
+>> compress('098')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 17, in compress
+    raise ValueError("Input string must be all upper case letters")
+ValueError: Input string must be all upper case letters
+
++++++++++++++++++++++++++
+
+
+Tests for decompress:
++++++++++++++++++++++++++
+
+>>> decompress('AA9AA0')
+'AAAAAAAAAAAAA'
+
+>>> decompress('ABAC')
+'ABAC'
+
+>>> decompress('A')
+'A'
+
+>>> decompress('AA')
+'AA'
+
+>>> decompress('AA0B')
+'AAB'
+
+>>> decompress('AA9A')
+'AAAAAAAAAAAA'
+
+>>> decompress('AA0BB0')
+'AABB'
+
+>>> decompress('AA0BB0CC0DD0')
+'AABBCCDD'
+
+>>> decompress('AA1CBB0C')
+'AAACBBC'
+
+>>> decompress('AB9')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 48, in decompress
+    raise ValueError("Invalid compression")
+ValueError: Invalid compression
+
+>>> decompress('aa0')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 48, in decompress
+    raise ValueError("Invalid compression")
+ValueError: Invalid compression
+
+>>> decompress('42')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "compression.py", line 48, in decompress
+    raise ValueError("Invalid compression")
+ValueError: Invalid compression
+
++++++++++++++++++++++++++
+
